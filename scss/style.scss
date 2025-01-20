@@ -47,6 +47,7 @@ body {
 	padding: toRem(20) 0;
 }
 .wrapper {
+	position: relative;
 }
 .nav {
 	&__icon img {
@@ -483,5 +484,44 @@ footer {
 	&:hover {
 		transform: scale(1.1);
 		// background-color: white;
+	}
+}
+// ======================================  my logo =============================================
+
+.creted {
+	position: absolute;
+	bottom: toRem(-50);
+	right: toRem(10);
+	display: flex;
+	justify-content: end;
+	padding: 0;
+	cursor: pointer;
+
+	& p {
+		display: flex;
+		align-items: center;
+		color: black;
+		font-size: toRem(6);
+	}
+	&:hover {
+		// background-color: rgb(255, 215, 0);
+		background: -webkit-linear-gradient(135deg, rgb(255, 215, 0), rgb(1, 106, 53));
+		background: -moz-linear-gradient(135deg, rgb(255, 215, 0), rgb(1, 106, 53));
+		background: linear-gradient(135deg, rgb(255, 215, 0), rgb(1, 106, 53));
+		border-radius: 10px;
+		padding: toRem(10);
+		z-index: 999;
+		bottom: toRem(-50);
+		.sh {
+			width: toRem(50);
+			margin: 0 toRem(4);
+		}
+		& p {
+			font-size: toRem(16);
+			color: rgb(1, 106, 53);
+		}
+		& span {
+			color: rgb(255, 215, 0);
+		}
 	}
 }
