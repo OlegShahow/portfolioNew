@@ -1,0 +1,487 @@
+@import url(./basestyle.scss);
+
+@function toRem($value) {
+	$baseFontSize: 16;
+	@return ($value/$baseFontSize) * 1rem;
+}
+
+$minWidth: 320px;
+$maxWidth: 1920; // Ширина полотна (макета)
+
+@mixin adaptiveValue($property, $pcSize, $mobSize) {
+	$addSize: $pcSize - $mobSize;
+	$addMobSize: $addSize + $addSize * 0.7;
+
+	@media (min-width: toRem(1920)) {
+		#{$property}: #{$pcSize + px};
+	}
+
+	@media (max-width: toRem(1920)) {
+		#{$property}: calc(#{$mobSize + px} + #{$addMobSize} * ((100vw - 767px) / #{$maxWidth}));
+
+		// @media (max-width: 767px) {
+		// 	#{$property}: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+		// }
+	}
+}
+//   @include adaptiveValue ($property , $pcSize, $mobSize);
+
+// @include adaptiveValue($property, $pcSize, $mobSize);
+
+[class*="__container"] {
+	max-width: 1680px;
+	padding: 0 20px;
+	margin: 0 auto;
+}
+
+// --------------------------------------------------------------------------------------------------
+body {
+	--s: 100px; /* control the size */
+
+	--_g: #0000 90deg, rgba(58, 51, 102, 0.036) 0;
+	background: conic-gradient(from 90deg at 2px 2px, var(--_g)), conic-gradient(from 90deg at 1px 1px, var(--_g));
+	background-size:
+		var(--s) var(--s),
+		calc(var(--s) / 5) calc(var(--s) / 5);
+	box-shadow: inset 1px 1px 16px black;
+	padding: toRem(20) 0;
+}
+.wrapper {
+}
+.nav {
+	&__icon img {
+		width: toRem(50);
+		transition: 0.6s;
+		&:hover {
+			transform: scale(1.2);
+			cursor: pointer;
+			box-shadow: 0px 0px 26px black;
+		}
+	}
+	&__text {
+		padding: 0 toRem(10);
+		background:
+		//  linear-gradient(135deg, rgba(0, 0, 0, 0.495) 50%, rgba(0, 0, 0, 0.24) 50%);
+			linear-gradient(
+			5deg,
+			rgba(0, 0, 0, 0.358) 0%,
+			white 25%,
+			rgba(0, 0, 0, 0.365) 50%,
+			white 75%,
+			rgba(0, 0, 0, 0.365) 100%
+		);
+
+		box-shadow: 0px 0px 6px black;
+		overflow: hidden; /* Скрыть текст, выходящий за пределы контейнера */
+
+		& p {
+			font-size: toRem(20);
+			font-weight: 600;
+			letter-spacing: 2px;
+			white-space: nowrap; /* Ожидаем, что текст не будет переноситься на новую строку */
+			// overflow: hidden; /* Скрыть текст, выходящий за пределы контейнера */
+			display: inline-block; /* Для правильного отображения анимации */
+			animation: move 45s linear infinite;
+
+			@keyframes move {
+				0% {
+					transform: translateX(130%); /* Начать с правой стороны */
+				}
+				100% {
+					transform: translateX(-100%); /* Переместить влево за пределы */
+				}
+			}
+
+			@media (max-width: toRem(997)) {
+				animation: move 30s linear infinite;
+				@keyframes move {
+					0% {
+						transform: translateX(55%); /* Начать с правой стороны */
+					}
+					100% {
+						transform: translateX(-100%); /* Переместить влево за пределы */
+					}
+				}
+			}
+			@media (max-width: toRem(425)) {
+				animation: move 30s linear infinite;
+				@keyframes move {
+					0% {
+						transform: translateX(35%); /* Начать с правой стороны */
+					}
+					100% {
+						transform: translateX(-100%); /* Переместить влево за пределы */
+					}
+				}
+			}
+		}
+		& img {
+			width: toRem(30);
+			margin-right: toRem(10);
+		}
+		& img:nth-child(2) {
+			// width: toRem(30);
+			transform: rotate(180deg);
+			margin-left: toRem(10);
+		}
+	}
+}
+.main {
+	&__container {
+		// border: 1px solid black;
+		text-align: center;
+		padding-bottom: toRem(70);
+	}
+	&__name {
+		& h1 {
+			font-family: "Playfair Display SC", serif;
+			font-weight: 900;
+			font-size: toRem(50);
+			letter-spacing: 2px;
+			text-shadow:
+				1px 1px 6px white,
+				2px 2px 6px black;
+		}
+	}
+	&__info {
+		// border: 1px solid black;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		@media (max-width: toRem(1450)) {
+			justify-content: center;
+			column-gap: toRem(20);
+		}
+		@media (max-width: toRem(998)) {
+			flex-direction: column;
+		}
+	}
+	&__info--text {
+		font-family: "Montserrat", serif;
+		font-family: "Alegreya", serif;
+		font-family: "Yeseva One", serif;
+		letter-spacing: 2px;
+		// font-size: toRem(20);
+		@include adaptiveValue("font-size", 20, 18);
+		@media (max-width: toRem(998)) {
+			order: 2;
+		}
+		& h3 {
+			border-bottom: 1px dashed black;
+			margin-bottom: toRem(50);
+
+			& span {
+				font-family: "Cormorant Infant", serif;
+				font-size: toRem(30);
+				border-bottom: none;
+			}
+		}
+		& p {
+			display: flex;
+			align-items: center;
+			font-family: "Yeseva One", serif;
+			font-weight: 700;
+			font-style: italic;
+			padding: toRem(6);
+			// border: 1px solid black;
+			box-shadow: 0px 0px 16px black;
+			&:hover {
+				transform: scale(1.01);
+			}
+		}
+
+		& .info--icon {
+			@include adaptiveValue("width", 40, 30);
+			margin-right: toRem(10);
+		}
+		& .leng {
+			@include adaptiveValue("width", 40, 30);
+		}
+	}
+
+	// .......................................................................................................
+
+	&__info--photo {
+		position: relative;
+		// width: toRem(600);
+		@include adaptiveValue("width", 600, 350);
+		// height: toRem(300);
+		@include adaptiveValue(" height", 300, 160);
+		background-image: url(../img/OlegS.png);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+		margin-top: toRem(36);
+		@media (max-width: toRem(998)) {
+			order: 1;
+		}
+
+		&::after {
+			content: "";
+			@include adaptiveValue("width", 710, 400);
+			@include adaptiveValue("height", 330, 190);
+			// border: 3px solid gold;
+			// // border-bottom: 1px solid rgba(196, 14, 14, 0);
+			// border-right: 3px solid green;
+			// border-left: 3px solid yellow;
+			// border-top: 1px solid rgba(29, 30, 28, 0);
+			border-radius: 50%;
+			bottom: toRem(-3);
+			left: toRem(-7);
+			background-color: rgba(255, 217, 0, 0);
+			position: absolute;
+			box-shadow:
+				0px 0px 16px black,
+				inset 0px 0px 6px black;
+
+			transition:
+				box-shadow 0.3s ease,
+				transform 0.3s ease; /* Плавный переход для box-shadow и transform */
+		}
+		&:hover::after {
+			cursor: pointer;
+			box-shadow:
+				// 0px 0px 16px black,
+				// inset 0px 0px 6px black;
+				0px 0px 1px black,
+				inset 0px 0px 16px black;
+			@media (max-width: toRem(970)) {
+				// box-shadow: none;
+				cursor: default; /* Возвращаем стандартный курсор */
+			}
+		}
+		&:active::after {
+			transform: scale(0.99);
+			@media (max-width: toRem(970)) {
+				transform: none;
+			}
+		}
+	}
+	// .......................................................................................................
+
+	// =======================================================================================================
+}
+.main {
+	&__about {
+	}
+}
+.about {
+	&__container {
+		text-align: center;
+		padding: toRem(20) 0;
+		box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.441);
+		transition: box-shadow 0.3s ease-in-out; /* Плавный переход для тени */
+		&:hover {
+			box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.441);
+		}
+		& p {
+			font-size: toRem(20);
+			font-weight: 600;
+		}
+		& img {
+			width: toRem(30);
+			margin-right: toRem(10);
+		}
+	}
+}
+
+// ==============================================  works  =====================================================================
+
+.main {
+	&__works {
+	}
+	&__works--title {
+		& h2 {
+			font-family: "Yeseva One", serif;
+			font-size: toRem(50);
+
+			// фоновое изображение или цвет в пределах самого текста
+			background-clip: text;
+			//    Это свойство делает сам текст прозрачным, что обычно используется в сочетании с background-clip: text
+			color: transparent;
+			background-color: rgb(50, 47, 47);
+			// 	text-shadow нужен для эффекта
+			text-shadow: 0px 0px 7px rgb(198, 196, 196);
+		}
+	}
+}
+.works {
+	&__container {
+		text-align: center;
+	}
+	&__box {
+		box-shadow: inset 0px 0px 16px black;
+		padding: toRem(20);
+		display: flex;
+		flex-direction: column;
+		row-gap: toRem(20);
+	}
+	&__box--card {
+		padding: toRem(10);
+		box-shadow: 0px 0px 16px black;
+		@media (max-width: toRem(400)) {
+			padding: toRem(4);
+		}
+		& p {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: toRem(20);
+			font-family: "Alegreya", serif;
+			font-weight: 700;
+			& img {
+				width: toRem(30);
+				margin-right: toRem(10);
+			}
+		}
+		& button {
+			cursor: pointer;
+			box-shadow: 0px 0px 26px black;
+			border: none;
+			transition: 0.2s;
+			padding: toRem(4);
+			font-family: "Alegreya", serif;
+			font-weight: 600;
+			&:hover {
+				box-shadow: 0px 0px 16px black;
+			}
+		}
+		& .girafe img {
+			width: toRem(20);
+		}
+	}
+}
+.works__box--up,
+.works__box--down {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: center;
+	row-gap: toRem(20);
+	column-gap: toRem(6);
+
+	@media (max-width: toRem(1095)) {
+		justify-content: center;
+	}
+}
+
+.down--title,
+.up--title {
+	font-family: "Yeseva One", serif;
+	font-size: toRem(30);
+	font-weight: 900;
+	color: white;
+	letter-spacing: 2px;
+	text-shadow:
+		0px 0px 2px rgb(0, 0, 0),
+		-1px -1px 2px rgba(255, 255, 255, 0.8),
+		1px 1px 4px rgb(0, 0, 0),
+		-1px -1px 1px rgb(0, 0, 0),
+		1px 1px 1px rgba(255, 255, 255, 0.8),
+		-1px -1px 1px rgb(0, 0, 0);
+}
+
+.card--img button {
+	margin-top: toRem(20);
+}
+.card--button {
+}
+
+.img--item img {
+	width: toRem(300);
+	max-height: toRem(120);
+	transition: 0.6s;
+	&:hover {
+		transform: scale(1.6);
+		cursor: pointer;
+		box-shadow: 0px 0px 26px black;
+
+		@media (max-width: toRem(970)) {
+			transform: none; /* Отключаем масштабирование */
+			cursor: default; /* Возвращаем стандартный курсор */
+			box-shadow: none; /* Убираем тень */
+		}
+	}
+}
+
+// ==========================================================================================================
+
+footer {
+	position: relative;
+	margin: toRem(50) 0;
+	padding-bottom: toRem(50);
+	text-align: center;
+	// 	&::after {
+	// 	content: "";
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+	// 	width: 100%;
+	// 	height: 100%;
+	// 	background-image: url("../img/smok.png");
+	// 	background-repeat: no-repeat;
+	// 	background-size:100% 130%;
+	// 	background-position: center;
+	// 	transform: rotate(180deg); /* Поворот фона */
+	// 	z-index: -1; /* Размещаем псевдоэлемент за содержимым */
+	// }
+
+	& h2 {
+		font-family: "Yeseva One", serif;
+		font-size: toRem(50);
+
+		// фоновое изображение или цвет в пределах самого текста
+		background-clip: text;
+		//    Это свойство делает сам текст прозрачным, что обычно используется в сочетании с background-clip: text
+		color: transparent;
+		background-color: rgb(50, 47, 47);
+		// 	text-shadow нужен для эффекта
+		text-shadow: 0px 0px 7px rgb(198, 196, 196);
+		@media (max-width: toRem(400)) {
+			font-size: toRem(40);
+		}
+	}
+}
+
+.footer {
+	position: relative;
+	border: 2px solid red;
+
+	&__container {
+		display: flex;
+		justify-content: space-around;
+
+		@media (max-width: toRem(409)) {
+			flex-direction: column;
+			align-items: center;
+			row-gap: toRem(20);
+		}
+	}
+}
+.fblock {
+	// width: toRem(200);
+	@include adaptiveValue("width", 200, 180);
+	height: toRem(100);
+	// @include adaptiveValue("height", 100, $mobSize);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: toRem(20);
+	box-shadow: 0px 0px 26px black;
+	transition: transform 0.7s ease;
+	& img {
+		width: toRem(30);
+	}
+	& p {
+		font-size: toRem(20);
+		font-weight: 600;
+	}
+	& a {
+		text-decoration: none;
+		color: rgb(14, 14, 14);
+	}
+	&:hover {
+		transform: scale(1.1);
+		// background-color: white;
+	}
+}
