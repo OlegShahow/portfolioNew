@@ -1,5 +1,6 @@
 @import url(./basestyle.scss);
 
+//
 @function toRem($value) {
 	$baseFontSize: 16;
 	@return ($value/$baseFontSize) * 1rem;
@@ -62,6 +63,8 @@ body {
 		// margin-left: 20vw;
 	}
 	&__icon p {
+		// font-family: "Depraved";
+		// font-weight: 400;
 		font-weight: 900;
 		opacity: 0;
 		transform: scale(0);
@@ -179,13 +182,15 @@ body {
 		flex-direction: column;
 		// align-items: center;
 		& h1 {
-			font-family: "Playfair Display SC", serif;
-			font-weight: 900;
-			font-size: toRem(50);
-			letter-spacing: 2px;
+			// font-family: "Playfair Display SC", serif;
+			font-family: "MyCustomFont";
+			font-weight: normal;
+			font-size: toRem(70);
+			letter-spacing: 4px;
 			text-shadow:
 				1px 1px 6px white,
-				2px 2px 6px black;
+				2px 2px 13px black;
+			// text-shadow: none;
 		}
 	}
 	&__info {
@@ -412,6 +417,7 @@ body {
 
 .down--title,
 .up--title {
+	margin: toRem(40) 0;
 	font-family: "Yeseva One", serif;
 	font-size: toRem(30);
 	font-weight: 900;
@@ -455,21 +461,7 @@ footer {
 	position: relative;
 	margin: toRem(50) 0;
 	padding-bottom: toRem(50);
-	text-align: center;
-	// 	&::after {
-	// 	content: "";
-	// 	position: absolute;
-	// 	top: 0;
-	// 	left: 0;
-	// 	width: 100%;
-	// 	height: 100%;
-	// 	background-image: url("../img/smok.png");
-	// 	background-repeat: no-repeat;
-	// 	background-size:100% 130%;
-	// 	background-position: center;
-	// 	transform: rotate(180deg); /* Поворот фона */
-	// 	z-index: -1; /* Размещаем псевдоэлемент за содержимым */
-	// }
+	// text-align: center;
 
 	& h2 {
 		font-family: "Yeseva One", serif;
@@ -528,6 +520,55 @@ footer {
 	&:hover {
 		transform: scale(1.1);
 		// background-color: white;
+	}
+}
+
+.footer {
+	&__title {
+		// border: 1px solid black;
+		// width: toRem(800);
+		@include adaptiveValue(" width", 800, 450);
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		& img {
+			width: toRem(40);
+			@media (max-width: toRem(650)) {
+				width: toRem(26);
+			}
+			@media (max-width: toRem(366)) {
+				width: toRem(20);
+			}
+		}
+		& h2 {
+			@media (max-width: toRem(606)) {
+				font-size: toRem(40);
+			}
+			@media (max-width: toRem(366)) {
+				font-size: toRem(30);
+			}
+		}
+	}
+	&__title--one {
+		align-self: flex-start;
+	}
+	&__title--twoo {
+		margin-top: toRem(-30);
+		align-self: center;
+	}
+	&__title--three {
+		margin-top: toRem(-30);
+		align-self: flex-end;
+	}
+}
+
+.footer__title--one,
+.footer__title--twoo,
+.footer__title--three {
+	// display: flex;
+	// align-items: center;
+	@media (max-width: toRem(826)) {
+		align-self: center;
 	}
 }
 // ======================================  my logo =============================================

@@ -58,3 +58,24 @@
   font-weight: 900;
   font-style: italic;
 }
+
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("/fonts/EnglishRose.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Gothic";
+  src: url("/fonts/Gothic.woff2");
+}
+@font-face {
+  font-family: "GE";
+  src: url("/fonts/GE.woff2");
+}
+@font-face {
+  font-family: "Hungover";
+  src: url("/fonts/Hungover.woff2");
+}
+@font-face {
+  font-family: "Depraved";
+  src: url("/fonts/Depraved.ttf");
+}

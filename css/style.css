@@ -206,11 +206,11 @@ body {
           flex-direction: column;
 }
 .main__name h1 {
-  font-family: "Playfair Display SC", serif;
-  font-weight: 900;
-  font-size: 3.125rem;
-  letter-spacing: 2px;
-  text-shadow: 1px 1px 6px white, 2px 2px 6px black;
+  font-family: "MyCustomFont";
+  font-weight: normal;
+  font-size: 4.375rem;
+  letter-spacing: 4px;
+  text-shadow: 1px 1px 6px white, 2px 2px 13px black;
 }
 .main__info {
   display: -webkit-box;
@@ -531,6 +531,7 @@ body {
 
 .down--title,
 .up--title {
+  margin: 2.5rem 0;
   font-family: "Yeseva One", serif;
   font-size: 1.875rem;
   font-weight: 900;
@@ -572,7 +573,6 @@ footer {
   position: relative;
   margin: 3.125rem 0;
   padding-bottom: 3.125rem;
-  text-align: center;
 }
 footer h2 {
   font-family: "Yeseva One", serif;
@@ -658,6 +658,73 @@ footer h2 {
   -webkit-transform: scale(1.1);
       -ms-transform: scale(1.1);
           transform: scale(1.1);
+}
+
+.footer__title {
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+@media (min-width: 120rem) {
+  .footer__title {
+     width: 800px;
+  }
+}
+@media (max-width: 120rem) {
+  .footer__title {
+     width: calc(450px + 595 * (100vw - 767px) / 1920);
+  }
+}
+.footer__title img {
+  width: 2.5rem;
+}
+@media (max-width: 40.625rem) {
+  .footer__title img {
+    width: 1.625rem;
+  }
+}
+@media (max-width: 22.875rem) {
+  .footer__title img {
+    width: 1.25rem;
+  }
+}
+@media (max-width: 37.875rem) {
+  .footer__title h2 {
+    font-size: 2.5rem;
+  }
+}
+@media (max-width: 22.875rem) {
+  .footer__title h2 {
+    font-size: 1.875rem;
+  }
+}
+.footer__title--one {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+.footer__title--twoo {
+  margin-top: -1.875rem;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+.footer__title--three {
+  margin-top: -1.875rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+@media (max-width: 51.625rem) {
+  .footer__title--one,
+  .footer__title--twoo,
+  .footer__title--three {
+    -ms-flex-item-align: center;
+        align-self: center;
+  }
 }
 
 .creted {
